@@ -1,0 +1,38 @@
+<html>
+	<head th:replace="~{base :: head}"></head>
+	<body>
+		<div th:replace="~{base :: logo}"></div>
+		<div class="container">
+			<div th:replace="~{base :: titulo('Meus Pedidos')}"></div>
+			<div th:replace="~{base :: navbar}"></div>
+			<div class="card mb-3" th:each="pedido: ${pedidos}">
+				
+				<th:block th:switch="${pedido.status.name()}">
+					<div th:case="'AGUARDANDO'" class="card-header alert alert-warning" th:text="${pedido.nome}">Nome do produto</div>
+					<div th:case="'APROVADO'" class="card-header alert alert-success" th:text="${pedido.nome}">Nome do produto</div>
+					<div th:case="'ENTREGUE'" class="card-header alert alert-dark" th:text="${pedido.nome}">Nome do produto</div>
+				</th:block>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-12 col-md-8 mb-3">
+							<div class="row">
+								<div class="col-4">Valor: <span th:if="${pedido.valorNegociado} != null" th:text="${'R$ ' + #numbers.formatDecimal(pedido.valorNegociado, 3, 'POINT', 2, 'COMMA')}">valor do produto</span></div>
+								<div class="col-8">Data da Entrega: <span th:text="${#temporals.format(pedido.dataDaEntrega, 'dd/MM/yyyy')}">data da entrega do produto</span></div>
+							</div>
+							<div>Link: <a class="btn btn-sm btn-primary" target="blank" th:href="${pedido.urlProduto}" th:text="${pedido.nome}">exemplo de texto para o link</a></div>
+							<div>Descrição</div>
+							<div>
+							  	<textarea style="resize: none;" class="form-control" cols="5" rows="3" th:placeholder="${pedido.descricao}" id="floatingTextareaDisabled" disabled></textarea>
+							</div>
+						</div>
+						<div class="col-12 col-md-4">
+							<div>
+								<img class="img-thumbnail" th:alt="${pedido.nome}" th:src="${pedido.urlImagem}">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

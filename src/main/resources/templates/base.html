@@ -1,0 +1,33 @@
+<head th:fragment="head">
+	<meta charset="UTF-8">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+	<style type="text/css">
+		.logo-container {
+			background-color: #47bcff;
+			color: #fff;
+		}
+			
+		.logo {
+			font-size: 2rem;
+		}
+	</style>
+</head>
+
+<div th:fragment="logo" class="logo-container mb-3 p-3 d-flex justify-content-between align-items-center">
+	<span class="logo fw-bold">mudi</span>
+	<span>login</span>
+</div>
+
+<div th:fragment="titulo(valor)" class="container-fluid bg-light py-5 mb-0">
+	<h1 class="display-4" th:text="${valor}"></h1>
+</div>
+			
+<nav th:fragment="navbar" class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between p-2 mb-3">
+	<div class="navbar-nav">
+		<a th:classappend="${status} == null ? 'active'" class="nav-item nav-link" href="/home">Todos</a>
+		<a th:classappend="${status} == 'aguardando' ? 'active bg-secondary text-white'" class="nav-item nav-link" href="/home/aguardando">Aguardando</a>
+		<a th:classappend="${status} == 'aprovado' ? 'active bg-secondary text-white'" class="nav-item nav-link" href="/home/aprovado">Aprovado</a>
+		<a th:classappend="${status} == 'entregue' ? 'active bg-secondary text-white'" class="nav-item nav-link" href="/home/entregue">Entregue</a>
+	</div>
+	<a href="/pedido/formulario" class="btn btn-outline-success my-2 my-sm-0">Novo</a>
+</nav>
